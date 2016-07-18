@@ -1,6 +1,5 @@
 package io.pivotal.portfolio.service;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import io.pivotal.portfolio.domain.Holding;
 import io.pivotal.portfolio.domain.Order;
@@ -38,6 +35,8 @@ public class PortfolioService {
 	private static final Logger logger = LoggerFactory
 			.getLogger(PortfolioService.class);
 
+	private static Integer count = 0;
+	
 	/**
 	 * The order repository to store Order objects.
 	 */
@@ -76,6 +75,24 @@ public class PortfolioService {
 		List<Order> orders = repository.findByAccountId(accountId);
 		Portfolio folio = new Portfolio();
 		folio.setAccountId(accountId);
+		
+		//arbitrary load block
+		/*synchronized (count) {
+			if(count++>5){
+				double fibs = Math.random()*10;
+			
+				while(fibs < 8){
+					fibs*=10;
+				}
+				
+				for(int i = (int) fibs; i > 0; i--){
+					fibLoad(i);
+				}
+				count = 0;	
+			}
+		}*/
+		
+		
 		return createPortfolio(folio, orders);
 	}
 
@@ -182,5 +199,11 @@ public class PortfolioService {
 			}
 		}
 
+	}
+	
+	
+	private long fibLoad(int n){ 
+        if (n <= 1) return n;
+        else return fibLoad(n-1) + fibLoad(n-2);
 	}
 }
