@@ -8,6 +8,6 @@ env:
     JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: { memory_sizes: { metaspace: 100m }, memory_heuristics: {metaspace: 10, heap: 65, native: 20, permgen: 10, stack: 5}  }]'
 applications:
 - name: portfolio
-  random-route: true
+  host: portfolio-s1p12
   path: libs/portfolio-${version}.jar
   services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server ]
