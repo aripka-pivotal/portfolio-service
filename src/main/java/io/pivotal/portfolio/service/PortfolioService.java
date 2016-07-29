@@ -1,5 +1,6 @@
 package io.pivotal.portfolio.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -202,8 +203,21 @@ public class PortfolioService {
 	}
 	
 	
+	//maybe later
 	private long fibLoad(int n){ 
         if (n <= 1) return n;
         else return fibLoad(n-1) + fibLoad(n-2);
+	}
+	
+	public List<Portfolio> getPortfolios(){
+		
+		ArrayList<Portfolio> allPortfolios = new ArrayList<Portfolio>();
+		
+		for(String accountId: repository.getAllAccounts()){
+			allPortfolios.add(getPortfolio(accountId));
+		}
+		
+		return allPortfolios;
+		
 	}
 }

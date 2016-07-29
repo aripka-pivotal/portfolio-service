@@ -4,6 +4,8 @@ import io.pivotal.portfolio.domain.Order;
 import io.pivotal.portfolio.domain.Portfolio;
 import io.pivotal.portfolio.service.PortfolioService;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,5 +84,10 @@ public class PortfolioController {
 			logger.warn("Order not saved: " + order);
 			return new ResponseEntity<Order>(savedOrder, responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@RequestMapping("/allPortfolios")
+	public List<Portfolio> getAllPortfolios(){
+		return service.getPortfolios();
 	}
 }
