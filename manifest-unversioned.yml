@@ -1,7 +1,7 @@
 ---
 timeout: 180
 instances: 1
-memory: 512M
+memory: 1024M
 env:
     SPRING_PROFILES_ACTIVE: cloud
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
@@ -10,4 +10,4 @@ applications:
 - name: portfolio
   host: portfolio-s1p12
   path: libs/portfolio-${version}.jar
-  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server ]
+  services: [ traderdb, new-rel-svc, discovery-service, circuit-breaker-dashboard, config-server ]
