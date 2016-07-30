@@ -7,8 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,7 +28,8 @@ public class Order {
 	public static BigDecimal DEFAULT_ORDER_FEE = new BigDecimal(10.50);
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@SequenceGenerator(initialValue=2000, name="IdSeq")
+	@GeneratedValue(generator="IdSeq")
 	@Column(name = "orderid")
 	private Integer orderId;
 
